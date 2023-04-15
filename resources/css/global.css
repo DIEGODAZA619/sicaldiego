@@ -1,0 +1,44 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1100 ; 
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    /*visibility: hidden;
+    opacity: 0;*/
+    visibility: visible;
+    opacity: 1;
+}
+.cuadro-foto { 
+    float:left;
+    padding: 5px;
+    border: 2px double #ccc;
+    background-color: currentColor;
+    /*margin-right: -30px;*/
+    /*margin-bottom: 2px;
+    border-spacing: 8px;
+    border-collapse: separate;*/
+}
+.botonEliminarImg{
+    overflow: hidden;
+    position: relative;
+    right: -81%;
+    bottom: -3px;
+}
+.botonEliminarImg > .btn{
+    padding: 0.65rem 0.68rem
+}
+.fondoClaroNaranja
+{
+    background-color: #FADFBD  ; /* antiquewhite;   /* #d9edf7; coral;*/
+    padding: 5px;
+}
+.fondoFuerteNaranja
+{
+    background-color: #ee8828 ; /*#F37C09;   /* #FAEBD7; coral;*/
+    padding: 5px;
+}
+    
