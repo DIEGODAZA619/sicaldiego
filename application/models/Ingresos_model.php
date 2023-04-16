@@ -68,7 +68,7 @@ class Ingresos_model extends CI_Model
 	{
 		$query = $this->db_almacen->query("select *
 											 from inventarios_resumen 
-											where id_material = ".$id_"
+											where id_material = ".$id_material."
 											  and estado = 'AC'");
         return $query->result();   
 	}
@@ -123,7 +123,7 @@ class Ingresos_model extends CI_Model
 	{
 		$query = $this->db_almacen->query("select 1
 											 from ingresos_detalle i
-											where i.id_material = ".$id_"
+											where i.id_material = ".$id_material."
 											  and i.id_ingreso =".$id_ingreso."
 											  and i.estado = 'ELB'"
 											 );

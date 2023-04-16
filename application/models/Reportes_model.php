@@ -24,7 +24,7 @@ class Reportes_model extends CI_Model
 		$query = $this->db_almacen->query("select *
 											 from inventarios
 											where gestion = ".$gestion."
-											  and id_material = ".$id"
+											  and id_material = ".$idMaterial."
 											order by id_inventario_inicial_ingreso, id asc");
         return $query->result(); 
 	}
@@ -35,13 +35,13 @@ class Reportes_model extends CI_Model
 												( 
 												select i.*,'INGRESO' as tipo
 												  from inventarios i
-												 where i.id_material = ".$id"
+												 where i.id_material = ".$idMaterial."
 												   and i.gestion = ".$gestion."
 												   and tipo_proceso IN ('INGP','INGI')
 												  union all
 												select s.*,'SALIDA' as tipo
 												  from inventarios s
-												 where id_material = ".$id" 
+												 where id_material = ".$idMaterial." 
 												  and s.gestion = ".$gestion."
 												  and tipo_ingreso_egreso = 'SOLM')as tabla
 												order by tabla.id asc");
@@ -189,7 +189,7 @@ class Reportes_model extends CI_Model
 		$query = $this->db_almacen->query("select *
 											  from inventarios
 											 where 1 = 1
-											   and id_inventario = ".$id"
+											   and id_inventario = ".$idMaterial."
 											 order by id asc");
         return $query->result(); 
 	}

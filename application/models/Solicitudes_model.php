@@ -95,7 +95,7 @@ class Solicitudes_model extends CI_Model
 	{
 		$query = $this->db_almacen->query("select 1
 											 from solicitudes s
-											where s.id_material = ".$id_"
+											where s.id_material = ".$id_material."
 											  and s.id_funcionario =".$id_funcionario."
 											  and s.tipo_solicitud = '".$tipo."'
 											  and s.estado = '".$estado."'"
@@ -245,7 +245,7 @@ class Solicitudes_model extends CI_Model
 											  and s.id_material = m.id
 											  and s.tipo_solicitud = 'NOR'
 											  and s.id_funcionario = '".$id_funcionario."'
-											  and s.id_material = ".$id_"										  
+											  and s.id_material = ".$id_material."										  
 											  and s.estado = 'ENT'
 											  order by s.id desc");
         return $query->result(); 
@@ -383,7 +383,7 @@ class Solicitudes_model extends CI_Model
 	{
 		$query = $this->db_almacen->query(" select *
 											  from inventarios
-											 where id_material = ".$id" 
+											 where id_material = ".$idMaterial." 
 											   and saldo > 0
 											   and tipo_proceso IN ('INGI','INGP', 'INGS')  
 											   and estado = 'AC'
