@@ -8,12 +8,12 @@ class Funcionarios_model extends CI_Model
 	function __construct()
 	{
 		parent::__construct();			
-		$this->db_rrhh = $this->load->database('db_recursos_humanos', TRUE);
+		$this->db_rrhh = $this->load->database('db_almacen', TRUE);
 	}
 	function getfuncionarios()
 	{
 		$query = $this->db_rrhh->query("select *
-									      from personal.funcionario 
+									      from funcionario 
 									     order by id asc");
         return $query->result();   
 	}
@@ -21,7 +21,7 @@ class Funcionarios_model extends CI_Model
 	function getfuncionariosActivos()
 	{
 		$query = $this->db_rrhh->query("select *
-									      from personal.funcionario 
+									      from funcionario 
 									      where estado = 'AC'
 									     order by id asc");
         return $query->result();   
@@ -29,33 +29,33 @@ class Funcionarios_model extends CI_Model
 	function datosPersonas($id_persona)
 	{
 		$query = $this->db_rrhh->query("select *
-									      from personal.funcionario 
+									      from funcionario 
 									     where id= ".$id_persona);
         return $query->result();   
 	}
 	function datosPersonalesCompleto($id_persona)
 	{
 		$query = $this->db_rrhh->query("select *
-									      from personal.datos_personales_completo 
+									      from datos_personales_completo 
 									     where id= ".$id_persona);
         return $query->result();   
 	}
 	function estructura_id($iddireccion)
     {
-        $query = $this->db_rrhh->query("select * from personal.vista_puesto_funcionarios_activos d where d.id_dependencia =" . $iddireccion);
+        $query = $this->db_rrhh->query("select * from vista_puesto_funcionarios_activos d where d.id_dependencia =" . $iddireccion);
         return $query->result();
     }
 
     function subestructura_id($subdireccion)
     {
-        $query = $this->db_rrhh->query("select * from personal.vista_puesto_funcionarios_activos d where d.id_subdependencia =" . $subdireccion);
+        $query = $this->db_rrhh->query("select * from vista_puesto_funcionarios_activos d where d.id_subdependencia =" . $subdireccion);
         return $query->result();
     }
 
     function datosPersonalesDependencia($id_persona)
 	{
 		$query = $this->db_rrhh->query("select *
-									      from personal.vista_datos_puesto_funcionario 
+									      from vista_datos_puesto_funcionario 
 									     where id= ".$id_persona);
         return $query->result();   
 	}

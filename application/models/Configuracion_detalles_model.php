@@ -13,7 +13,7 @@ class Configuracion_detalles_model extends CI_Model
 	function getGestionVigente()
 	{
 		$query = $this->db_almacen->query("select *
-			                              from configuraciones.gestion
+			                              from gestion
 			                             where estado = 'AC'");
         return $query->result();
 	}
@@ -30,7 +30,7 @@ class Configuracion_detalles_model extends CI_Model
     function getValoresProveedor($idProveedor)
     {
     	$query = $this->db_almacen->query("select *
-			                                 from material.proveedores
+			                                 from proveedores
 			                                where id =".$idProveedor);
         return $query->result();
     }
@@ -38,7 +38,7 @@ class Configuracion_detalles_model extends CI_Model
     function getnumeroIngresoAlmacen($idIngreso)
     {
     	$query = $this->db_almacen->query("select *
-			                                 from inventario.ingresos
+			                                 from ingresos
 			                                where id =".$idIngreso);
         return $query->result();
     }
@@ -46,14 +46,14 @@ class Configuracion_detalles_model extends CI_Model
     function getnumeroSolicitudAlmacen($idSolicitud)
     {
     	$query = $this->db_almacen->query("select *
-			                                 from inventario.solicitud_direccion
+			                                 from solicitud_direccion
 			                                where id =".$idSolicitud);
         return $query->result();
     }
 	function getValoresDominios($concepto)
 	{
 		$query = $this->db_almacen->query("select *
-			                              from administracion.dominios
+			                              from dominios
 			                             where concepto ='".$concepto."'
 			                               and estado = 'AC'
 			                             order by orden asc");
@@ -62,7 +62,7 @@ class Configuracion_detalles_model extends CI_Model
 	function getValoresDominiosCombos($concepto)
 	{
 		$query = $this->db_almacen->query("select valor2, valor1
-			                              from administracion.dominios
+			                              from dominios
 			                             where concepto ='".$concepto."'
 			                               and estado = 'AC'
 										   order by valor2");
@@ -71,7 +71,7 @@ class Configuracion_detalles_model extends CI_Model
 	function getValoresDominiosConcepto($concepto,$valor)
 	{
 		$query = $this->db_almacen->query("select *
-			                              from administracion.dominios
+			                              from dominios
 			                             where concepto ='".$concepto."'
 			                               and valor1 ='".$valor."'
 			                               and estado = 'AC'
@@ -83,8 +83,8 @@ class Configuracion_detalles_model extends CI_Model
 	{
 		$query = $this->db_almacen->query("select c.*,
 		                                       d.valor2 as estadoregistro
-			                              from configuraciones.configuracion_detalles c,
-			                                   administracion.dominios d
+			                              from configuracion_detalles c,
+			                                   dominios d
 			                             where c.concepto ='".$concepto."'
 			                               and d.valor1 = c.estado
 			                               and d.concepto = 'ESTADO REGISTRO'     
@@ -94,7 +94,7 @@ class Configuracion_detalles_model extends CI_Model
 	function getConfiguracionDetalles_id($concepto)
 	{
 		$query = $this->db_almacen->query("select *
-			                              from configuraciones.configuracion_detalles c
+			                              from configuracion_detalles c
 			                             where c.concepto ='".$concepto."'			                               
 			                               and c.estado = 'AC'     
 			                             order by id asc");
@@ -103,14 +103,14 @@ class Configuracion_detalles_model extends CI_Model
 
 	function guardarConfiguracion($data)
     {       
-        $this->db_rrhh->insert('configuraciones.configuracion_detalles',$data); 
+        $this->db_rrhh->insert('configuracion_detalles',$data); 
         return $this->db_rrhh->insert_id();
     }
     
     function getConfiguracionDetallesId($id)
 	{
 		$query = $this->db_almacen->query("select *		                                       
-			                              from configuraciones.configuracion_detalles c
+			                              from configuracion_detalles c
 			                             where id = ".$id);
         return $query->result();
 	}

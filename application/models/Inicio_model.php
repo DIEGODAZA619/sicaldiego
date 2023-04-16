@@ -10,7 +10,7 @@ class Inicio_model extends CI_Model
 	function getIngresosNoAprobados($id_entidad)
 	{
 		$query = $this->db_almacen->query("select *
-											 from inventario.ingresos i
+											 from ingresos i
 											where i.id_entidad =".$id_entidad."
 											  and estado not in('AC') "
 											 );
@@ -28,10 +28,10 @@ class Inicio_model extends CI_Model
 			                                      u.descripcion as descripcion_unidad,
 			                                      s.cantidad_solicitada,
 			                                      TO_CHAR(s.fecha_registro ,'dd-MM-YYYY' ) as fecha_registro
-											 from material.materiales m, 
+											 from materiales m, 
 											      clasificacion.categorias c, 
 											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
@@ -50,8 +50,8 @@ class Inicio_model extends CI_Model
 										(select b.descripcion from  clasificacion.unidades_medida b Where  b.id= m.id_unidad ) as unidad, 
 										i.cantidad_entrada, i.cantidad_salida, i.saldo
 
-										from inventario.inventarios_resumen i
-										inner join material.materiales m on m.id= i.id_material
+										from inventarios_resumen i
+										inner join materiales m on m.id= i.id_material
 										where i.estado='AC'
 										order  by descripcion_del_producto 
 			");

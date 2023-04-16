@@ -20,10 +20,10 @@ class Materiales_model extends CI_Model
 			                                      c.descripcion as descripcion_categoria,
 			                                      u.descripcion as descripcion_unidad,
 			                                      i.saldo,i.cantidad_solicitada
-											 from material.materiales m,
-											      clasificacion.categorias c,
-											      clasificacion.unidades_medida u,
-											      inventario.inventarios_resumen i
+											 from materiales m,
+											      categorias c,
+											      unidades_medida u,
+											      inventarios_resumen i
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and i.id_material = m.id	
@@ -33,8 +33,8 @@ class Materiales_model extends CI_Model
 	function getMaterialesId($id_material)
 	{
 		$query = $this->db_almacen->query("select * , i.saldo,i.cantidad_solicitada
-											 from material.materiales m,
-											 inventario.inventarios_resumen i
+											 from materiales m,
+											 inventarios_resumen i
 											where 
 											i.id_material = m.id	
 											and m.id =".$id_material
@@ -44,7 +44,7 @@ class Materiales_model extends CI_Model
 	function getMaterialTotal()
 	{
 		$query = $this->db_almacen->query("select *
-											from material.materiales c
+											from materiales c
 										  where c.estado = 'AC'
 										  order by id asc");
         return $query->result();
@@ -52,7 +52,7 @@ class Materiales_model extends CI_Model
 	function getMaterialDescripcion($descripcion)
 	{
 		$query = $this->db_almacen->query("select *
-											from material.materiales c
+											from materiales c
 										  where c.descripcion = '".$descripcion."'
 										    and c.estado = 'AC'");
         return $query->result();
@@ -60,7 +60,7 @@ class Materiales_model extends CI_Model
 	function checkMaterial($descripcion,$unidad,$categoriaFamilia)
 	{
 		$query = $this->db_almacen->query("select *
-											from material.materiales c
+											from materiales c
 										  where c.descripcion = '".$descripcion."'
 										    and c.id_unidad = ".$unidad."
 										    and c.id_categoria = ".$categoriaFamilia);
@@ -71,14 +71,14 @@ class Materiales_model extends CI_Model
 	function getCategoria()
 	{
 		$query = $this->db_almacen->query("select *
-											from clasificacion.categorias c
+											from categorias c
 										  where c.nivel = '1'");
         return $query->result();
 	}
 	function getSubCategoria($id_padre)
 	{
 		$query = $this->db_almacen->query("select *
-											from clasificacion.categorias c
+											from categorias c
 										  where c.nivel = '2'
 										  and c.padre ='".$id_padre."'");
         return $query->result();
@@ -86,7 +86,7 @@ class Materiales_model extends CI_Model
 	function getMaterial($id_padre)
 	{
 		$query = $this->db_almacen->query("select *
-											from clasificacion.categorias c
+											from categorias c
 										  where c.nivel = '3'
 										  and c.padre ='".$id_padre."'");
         return $query->result();
@@ -94,12 +94,12 @@ class Materiales_model extends CI_Model
 	function getUnidad()
 	{
 		$query = $this->db_almacen->query("select *
-											from clasificacion.unidades_medida um");
+											from unidades_medida um");
         return $query->result();
 	}
 	function guardarMaterial($data)
     {
-        $this->db_almacen->insert('material.materiales',$data);
+        $this->db_almacen->insert('materiales',$data);
         return $this->db_almacen->insert_id();
     }
 
@@ -107,22 +107,22 @@ class Materiales_model extends CI_Model
 	function editarMaterial($id_registro,$data)
     {
         $this->db_almacen->where('id',$id_registro);
-        return $this->db_almacen->update('material.materiales',$data);
+        return $this->db_almacen->update('materiales',$data);
     }
 
     function guardarInventarioResumen($data)
     {
-        $this->db_almacen->insert('inventario.inventarios_resumen',$data);
+        $this->db_almacen->insert('inventarios_resumen',$data);
         return $this->db_almacen->insert_id();
     }
 
 	function getMaterialId($id_registro)
 	{
 		$query = $this->db_almacen->query("select m.*, c2.id as subcategoria, c3.id as categoria
-											from material.materiales m
-										   left join clasificacion.categorias c on m.id_categoria = c.id
-										   left join clasificacion.categorias c2 on c2.id =c.padre
-										   left join clasificacion.categorias c3 on c3.id =c2.padre
+											from materiales m
+										   left join categorias c on m.id_categoria = c.id
+										   left join categorias c2 on c2.id =c.padre
+										   left join categorias c3 on c3.id =c2.padre
 										   where m.id =".$id_registro);
         return $query->result();
 	}
@@ -137,9 +137,9 @@ class Materiales_model extends CI_Model
 			                                      u.descripcion as descripcion_unidad,
 			                                      m.ruta_imagen,
 			                                      m.nombre_imagen
-											 from material.materiales m,
-											      clasificacion.categorias c,
-											      clasificacion.unidades_medida u
+											 from materiales m,
+											      categorias c,
+											      unidades_medida u
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  order by m.id desc");
@@ -149,10 +149,10 @@ class Materiales_model extends CI_Model
 	function getNroCodigoCorrelativo($cat_id)
 	{
         $query = $this->db_almacen->query(" select count(*) + 1 as numero
-											   from clasificacion.categorias T0,
-											        clasificacion.categorias T1,
-											        clasificacion.categorias T2,
-											        material.materiales m
+											   from categorias T0,
+											        categorias T1,
+											        categorias T2,
+											        materiales m
 											  where T0.id = T1.padre
 											    and T1.id = T2.padre
 											    and T2.id = m.id_categoria
@@ -165,10 +165,10 @@ class Materiales_model extends CI_Model
 			,T1.id as id_2, T1.codigo as codigo_2 , T1.sigla
 			,T2.id as id_1 ,T2.codigo as codigo_1
 			--, cast(replace(T3.codigo , T1.sigla,'') as integer) + 1 numero
-			from clasificacion.categorias T0 
-			inner join clasificacion.categorias T1 on T1.id = T0.padre
-			inner join clasificacion.categorias T2 on T2.id = T1.padre
-			left join  material.materiales T3 on T3.id_categoria = T0.id
+			from categorias T0 
+			inner join categorias T1 on T1.id = T0.padre
+			inner join categorias T2 on T2.id = T1.padre
+			left join  materiales T3 on T3.id_categoria = T0.id
 			Where T1.id = ".$cat_id."
 			order by T3.codigo desc limit 1
 						");

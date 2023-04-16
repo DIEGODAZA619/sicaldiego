@@ -13,13 +13,13 @@ class Solicitudes_model extends CI_Model
 	// INSERT
 	function guardarSolicitudMaterial($data)
 	{
-		$this->db_almacen->insert('inventario.solicitudes',$data);
+		$this->db_almacen->insert('solicitudes',$data);
 		return $this->db_almacen->insert_id();
 	}
 
 	function guardarConfirmaciónSolicitudMaterial($data)
 	{
-		$this->db_almacen->insert('inventario.solicitud_direccion',$data);
+		$this->db_almacen->insert('solicitud_direccion',$data);
 		return $this->db_almacen->insert_id();
 	}
 
@@ -27,19 +27,19 @@ class Solicitudes_model extends CI_Model
 	function editarSolicitudMaterialDetalles($id_registro,$data)
 	{
 		$this->db_almacen->where('id',$id_registro);
-        return $this->db_almacen->update('inventario.solicitudes',$data);
+        return $this->db_almacen->update('solicitudes',$data);
 	}
 
 	function editarConfirmaciónSolicitudMaterialDetalles($id_registro,$data)
 	{
 		$this->db_almacen->where('id',$id_registro);
-        return $this->db_almacen->update('inventario.solicitud_direccion',$data);
+        return $this->db_almacen->update('solicitud_direccion',$data);
 	}
 
 	function editarInventarioMaterial($id_registro,$data)
 	{
 		$this->db_almacen->where('id',$id_registro);
-        return $this->db_almacen->update('inventario.inventarios',$data);
+        return $this->db_almacen->update('inventarios',$data);
 	}
 	
 
@@ -56,10 +56,10 @@ class Solicitudes_model extends CI_Model
 			                                      i.saldo,
 			                                      i.cantidad_solicitada,
 			                                      i.cantidad_disponible
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.inventarios_resumen i
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      inventarios_resumen i
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and i.id_material = m.id
@@ -78,10 +78,10 @@ class Solicitudes_model extends CI_Model
 			                                      u.descripcion as descripcion_unidad,
 			                                      s.cantidad_solicitada,
 			                                      s.fecha_registro			                                      
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
@@ -94,8 +94,8 @@ class Solicitudes_model extends CI_Model
 	function checkMaterialesSolicitado($id_material,$id_funcionario,$estado,$tipo)
 	{
 		$query = $this->db_almacen->query("select 1
-											 from inventario.solicitudes s
-											where s.id_material = ".$id_material."
+											 from solicitudes s
+											where s.id_material = ".$id_"
 											  and s.id_funcionario =".$id_funcionario."
 											  and s.tipo_solicitud = '".$tipo."'
 											  and s.estado = '".$estado."'"
@@ -106,7 +106,7 @@ class Solicitudes_model extends CI_Model
 	function getSolicitudId($idSolicitud)
 	{
 		$query = $this->db_almacen->query("select *
-											 from inventario.solicitudes s
+											 from solicitudes s
 											where s.id =".$idSolicitud);
         return $query->result();   	
 	}
@@ -114,7 +114,7 @@ class Solicitudes_model extends CI_Model
 	function getcantidadSolicitadaMaterial($idMaterial)
 	{
 		$query = $this->db_almacen->query("select case when sum(cantidad_autorizada)>0 then  sum(cantidad_autorizada) else 0 end as cantidad_solicitada
-											 from inventario.solicitudes 
+											 from solicitudes 
 											where estado not in ('AN','ENT','RC')
 											  and id_material =". $idMaterial);
         return $query->result();  
@@ -129,7 +129,7 @@ class Solicitudes_model extends CI_Model
 	function solicitudConfirmadasDireccion($idDependencia,$idsubdependencia,$tipoSolicitud,$estado)
 	{
 		$query = $this->db_almacen->query("select *
-											 from inventario.solicitud_direccion s
+											 from solicitud_direccion s
 											where s.id_dependencia = ".$idDependencia."
 											  and s.id_subdependencia = ".$idsubdependencia."
 											  and tipo_solicitud = '".$tipoSolicitud."'
@@ -151,10 +151,10 @@ class Solicitudes_model extends CI_Model
 			                                      s.fecha_registro,
 			                                      s.id_funcionario,
 			                                      s.id_confirmacion_direccion			                                      
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
@@ -179,10 +179,10 @@ class Solicitudes_model extends CI_Model
 			                                      s.fecha_registro,
 			                                      s.id_funcionario,
 			                                      s.id_confirmacion_direccion			                                      
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
@@ -206,10 +206,10 @@ class Solicitudes_model extends CI_Model
 			                                      s.fecha_registro,
 			                                      s.id_funcionario,
 			                                      s.id_confirmacion_direccion			                                      
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
@@ -236,16 +236,16 @@ class Solicitudes_model extends CI_Model
 			                                      s.fecha_entrega,
 			                                      s.id_funcionario,
 			                                      s.id_confirmacion_direccion			                                      
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
 											  and s.tipo_solicitud = 'NOR'
 											  and s.id_funcionario = '".$id_funcionario."'
-											  and s.id_material = ".$id_material."										  
+											  and s.id_material = ".$id_"										  
 											  and s.estado = 'ENT'
 											  order by s.id desc");
         return $query->result(); 
@@ -265,10 +265,10 @@ class Solicitudes_model extends CI_Model
 			                                      s.fecha_registro,
 			                                      s.id_funcionario,
 			                                      s.id_confirmacion_direccion			                                      
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
@@ -292,10 +292,10 @@ class Solicitudes_model extends CI_Model
 			                                      s.fecha_registro,
 			                                      s.id_funcionario,
 			                                      s.id_confirmacion_direccion			                                      
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
@@ -321,10 +321,10 @@ class Solicitudes_model extends CI_Model
 			                                      s.fecha_registro,
 			                                      s.id_funcionario,
 			                                      s.id_confirmacion_direccion			                                      
-											 from material.materiales m, 
-											      clasificacion.categorias c, 
-											      clasificacion.unidades_medida u,
-											      inventario.solicitudes s
+											 from materiales m, 
+											      categorias c, 
+											      unidades_medida u,
+											      solicitudes s
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
@@ -353,10 +353,10 @@ class Solicitudes_model extends CI_Model
 			                s.fecha_registro,
 			                s.id_funcionario,
 			                s.id_confirmacion_direccion			                                      
-					from material.materiales m, 
-							clasificacion.categorias c, 
-							clasificacion.unidades_medida u,
-							inventario.solicitudes s
+					from materiales m, 
+							categorias c, 
+							unidades_medida u,
+							solicitudes s
 					where m.id_categoria = c.id
 							and m.id_unidad = u.id
 							and s.id_material = m.id
@@ -372,7 +372,7 @@ class Solicitudes_model extends CI_Model
 	function getSolicitudesConfirmadasPorDireccion($estado)
 	{
 		$query = $this->db_almacen->query("select *
-											 from inventario.solicitud_direccion s
+											 from solicitud_direccion s
 											where estado =  '".$estado."'
 											order by s.id desc");
         return $query->result(); 
@@ -382,8 +382,8 @@ class Solicitudes_model extends CI_Model
 	function getMaterialInventarioPeps($idMaterial)
 	{
 		$query = $this->db_almacen->query(" select *
-											  from inventario.inventarios
-											 where id_material = ".$idMaterial." 
+											  from inventarios
+											 where id_material = ".$id" 
 											   and saldo > 0
 											   and tipo_proceso IN ('INGI','INGP', 'INGS')  
 											   and estado = 'AC'
@@ -394,7 +394,7 @@ class Solicitudes_model extends CI_Model
 	function getIdMaterialInventario($idInventario)
 	{
 		$query = $this->db_almacen->query(" select *
-											  from inventario.inventarios
+											  from inventarios
 											 where id = ".$idInventario);
         return $query->result(); 
 	}
@@ -402,7 +402,7 @@ class Solicitudes_model extends CI_Model
 	function getListarDatosSolicitudDireccion($idSolicitud)
 	{
 		$query = $this->db_almacen->query(" select *
-											  from inventario.solicitud_direccion
+											  from solicitud_direccion
 											 where id = ".$idSolicitud);
         return $query->result(); 
 	}

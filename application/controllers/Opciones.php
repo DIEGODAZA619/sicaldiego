@@ -23,63 +23,11 @@ class Opciones extends CI_Controller {
 	{
 		echo "inicio";
 	}
-	function cargar_opciones_usuarios() //CARGAR ROLES GENERALES
-	{
-		$filas = $this->roles_model->listaFuncionario();
-		$con=0;
-		foreach($filas as $fila)
-		{
-			$usuario = $this->roles_model->usuarioIdPersona($fila->id);
-			$id_usuario = $usuario[0]->id;
-			$this->cargar_opciones_todos($id_usuario);						
-			$con++;		
-		}
-		echo $con;
-	}
-
-	public function cargar_opciones_todos($id_usuario,$rol = 0)
-	{		
-		$opciones = array(71,75,85,92,96);
-		foreach ($opciones as $opcion)
-		{
-			if(!$this->roles_model->check_opciones($opcion,$id_usuario))
-			{
-				$data = array(
-					'id_opcion' => $opcion,
-					'id_usuario' => $id_usuario,
-				);
-				$insertar = $this->roles_model->guardarOpcionesRol($data);
-				echo $opcion." - ".$id_usuario."<br>";
-			}
-		}
-		return true;
-	}
 	
-	function cargarRolesResponsables()
-	{
-		$usuario = array(31,32,37,38,89,103,9,33,34,60,131,80,92,44,36,53,47,79,17,112,45,64,24,22,39,162);
-		$opciones = array(86);
-		foreach ($usuario as $id_usuario)
-		{
-			foreach ($opciones as $opcion)
-			{
-				if(!$this->roles_model->check_opciones($opcion,$id_usuario))
-				{
-					$data = array(
-						'id_opcion' => $opcion,
-						'id_usuario' => $id_usuario,
-					);
-					$insertar = $this->roles_model->guardarOpcionesRol($data);
-					echo $opcion."<br>";
-				}
-			}
-		}
-		return true;
-	}
 	function cargarRolesAlmacenes()
 	{		
-		$usuario = array(104,80);
-		$opciones = array(72,73,74,77,80,81,82,83,84,88,89,91,95,97,98);	
+		$usuario = array(1);
+		$opciones = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28);	
 		foreach ($usuario as $id_usuario)
 		{
 			foreach ($opciones as $opcion)
@@ -98,78 +46,7 @@ class Opciones extends CI_Controller {
 		return true;
 	}
 
-	function cargarRolesUnidadAdministrativaDireccion()
-	{
-		$usuario = array(60,44,104,80);
-		$opciones = array(72,75,76,79,90,93,94,95,97,98);	
-		foreach ($usuario as $id_usuario)
-		{
-			foreach ($opciones as $opcion)
-			{
-				if(!$this->roles_model->check_opciones($opcion,$id_usuario))
-				{
-					$data = array(
-						'id_opcion' => $opcion,
-						'id_usuario' => $id_usuario,
-					);
-					$insertar = $this->roles_model->guardarOpcionesRol($data);
-					echo $opcion."<br>";
-				}
-			}
-		}
-		return true;
-	}
-	function cargarRolesUnidadAdministrativa()
-	{
-		$usuario = array(60,80);
-		$opciones = array(78,87,95,97,98);	
-		foreach ($usuario as $id_usuario)
-		{
-			foreach ($opciones as $opcion)
-			{
-				if(!$this->roles_model->check_opciones($opcion,$id_usuario))
-				{
-					$data = array(
-						'id_opcion' => $opcion,
-						'id_usuario' => $id_usuario,
-					);
-					$insertar = $this->roles_model->guardarOpcionesRol($data);
-					echo $opcion."<br>";
-				}
-			}
-		}
-		return true;
-	}
-
-	function cargarTotalRoles()
-	{
-		$usuario = array(104,80);
-		$opciones = array(71,72,73,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,97,98);	
-		foreach ($usuario as $id_usuario)
-		{
-			foreach ($opciones as $opcion)
-			{
-				if(!$this->roles_model->check_opciones($opcion,$id_usuario))
-				{
-					$data = array(
-						'id_opcion' => $opcion,
-						'id_usuario' => $id_usuario,
-					);
-					$insertar = $this->roles_model->guardarOpcionesRol($data);
-					echo $opcion."<br>";
-				}
-			}
-		}
-		return true;
-	}
-
-	function rolesAdministrativos()
-	{
-		$this->cargar_opciones_usuarios();
-		$this->cargarRolesAlmacenes();
-		$this->cargarRolesUnidadAdministrativaDireccion();
-		$this->cargarRolesUnidadAdministrativa();
-	}
+	
 
 	
 }
