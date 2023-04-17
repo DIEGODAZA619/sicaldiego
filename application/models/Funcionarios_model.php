@@ -42,13 +42,15 @@ class Funcionarios_model extends CI_Model
 	}
 	function estructura_id($iddireccion)
     {
-        $query = $this->db_rrhh->query("select * from vista_puesto_funcionarios_activos d where d.id_dependencia =" . $iddireccion);
+        $query = $this->db_rrhh->query("select * from dependencia d where d.id =" . $iddireccion);
         return $query->result();
     }
 
+  
+
     function subestructura_id($subdireccion)
     {
-        $query = $this->db_rrhh->query("select * from vista_puesto_funcionarios_activos d where d.id_subdependencia =" . $subdireccion);
+        $query = $this->db_rrhh->query("select * from subdependencia d where d.id =" . $subdireccion);
         return $query->result();
     }
 

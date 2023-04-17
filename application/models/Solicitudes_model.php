@@ -44,7 +44,7 @@ class Solicitudes_model extends CI_Model
 	
 
 	//GET
-	function getMaterialesInventario()
+	function getMaterialesInventario($id_entidad)
 	{
 		$query = $this->db_almacen->query("select m.id as id_material, 
 			                                      m.codigo as codigo_material,
@@ -63,6 +63,7 @@ class Solicitudes_model extends CI_Model
 											where m.id_categoria = c.id
 											  and m.id_unidad = u.id
 											  and i.id_material = m.id
+											  and m.id_entidad = ".$id_entidad."
 											  order by i.saldo desc");
         return $query->result();         	
 	}
@@ -126,18 +127,15 @@ class Solicitudes_model extends CI_Model
 
 	// CONFIRMAR SOLICITUDES DIRECCION
 
-	function solicitudConfirmadasDireccion($idDependencia,$idsubdependencia,$tipoSolicitud,$estado)
+	function solicitudConfirmadasDireccion($solicitante)
 	{
 		$query = $this->db_almacen->query("select *
 											 from solicitud_direccion s
-											where s.id_dependencia = ".$idDependencia."
-											  and s.id_subdependencia = ".$idsubdependencia."
-											  and tipo_solicitud = '".$tipoSolicitud."'
-											  --and estado =  '".$estado."'
+											where s.id_funcionario_solicitante = ".$solicitante."
 											order by s.id desc");
         return $query->result(); 
 	}
-	function confirmarSolicitudDireccion($dependencia,$subdependencia,$tipoSolicitud,$estado)
+	function confirmarSolicitudDireccion($id_funcionario,$tipoSolicitud,$estado)
 	{
 		$query = $this->db_almacen->query("select s.id as id_solicitud, 
 			                                      m.codigo as codigo_material,
@@ -159,8 +157,7 @@ class Solicitudes_model extends CI_Model
 											  and m.id_unidad = u.id
 											  and s.id_material = m.id
 											  and s.tipo_solicitud = '".$tipoSolicitud."'
-											  and s.id_dependencia = ".$dependencia."
-											  and s.id_subdependencia = ".$subdependencia."									  
+											  and s.id_funcionario = ".$id_funcionario."											  							  
 											  and s.estado = '".$estado."'
 											  order by s.id desc");
         return $query->result(); 
@@ -369,11 +366,12 @@ class Solicitudes_model extends CI_Model
         return $query->result(); 
 	}
 
-	function getSolicitudesConfirmadasPorDireccion($estado)
+	function getSolicitudesConfirmadasPorDireccion($id_entidad,$estado)
 	{
 		$query = $this->db_almacen->query("select *
 											 from solicitud_direccion s
 											where estado =  '".$estado."'
+											  and id_entidad = ".$id_entidad."
 											order by s.id desc");
         return $query->result(); 
 	}

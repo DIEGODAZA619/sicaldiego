@@ -43,10 +43,10 @@ class Solicitudes extends CI_Controller
 	}
 
 	function cargartablasMaterialesAlmacen()
-
 	{
 		$draw = intval($this->input->get("draw"));
-		$filas = $this->solicitudes_model->getMaterialesInventario();
+		$id_entidad = $this->session->userdata('id_entidad');
+		$filas = $this->solicitudes_model->getMaterialesInventario($id_entidad);
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)
@@ -147,26 +147,19 @@ class Solicitudes extends CI_Controller
 
 	function guardarSolicitudMateriales()
 	{
-		$accion         			= $this->input->post('accion');		
-		$id_material    			= $this->input->post('id_material');
-		$cantidad       			= $this->input->post('txtCantidad');
-		$tipoSolicitud  			= $this->input->post('tipo_solicitud');
-		$id_registro    			= $this->input->post('id_registro');
-
-		$id_funcionario             = $this->session->userdata('id_funcionario');
+		$accion            = $this->input->post('accion');		
+		$id_material       = $this->input->post('id_material');
+		$cantidad          = $this->input->post('txtCantidad');
+		$tipoSolicitud     = $this->input->post('tipo_solicitud');
+		$id_registro       = $this->input->post('id_registro');
+		$id_funcionario    = $this->session->userdata('id_funcionario');
 		$valorDependencia  = json_decode(dependenciasFuncionario());		
 		$idDependencia     = $valorDependencia[0]->dependencia;
 		$idSubDependencia  = $valorDependencia[0]->SubDependencia;
-
-		
-
-		$id_entidad                 = $this->session->userdata('id_entidad');
-		$gestion                    = $this->session->userdata('gestion');
-
+		$id_entidad        = $this->session->userdata('id_entidad');
+		$gestion           = $this->session->userdata('gestion');
 		$resumen              = $this->ingresos_model->getInventarioResumenId($id_material);
-		$cantidad_disponible  = $resumen[0]->cantidad_disponible;
-
-		
+		$cantidad_disponible  = $resumen[0]->cantidad_disponible;		
 			if($accion == 'nuevo')
 			{
 				if($cantidad <= $cantidad_disponible)
@@ -257,8 +250,6 @@ class Solicitudes extends CI_Controller
 
 			}
 			$actualización = actualizarCantidadInventario($id_material);
-		
-					
 		$resultado ='[{
 							"resultado":"'.$resul.'",
 							"mensaje":"'.$mensaje.'"

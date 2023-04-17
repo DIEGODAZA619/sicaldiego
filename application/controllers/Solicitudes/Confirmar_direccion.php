@@ -55,7 +55,7 @@ class Confirmar_direccion extends CI_Controller
 			
 		$tipoSolicitud =  "NOR";
 		$estado = 'CON';
-		$filas = $this->solicitudes_model->solicitudConfirmadasDireccion($idDependencia,$idSubDependencia,$tipoSolicitud,$estado);
+		$filas = $this->solicitudes_model->solicitudConfirmadasDireccion($id_funcionario);
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)
@@ -97,22 +97,14 @@ class Confirmar_direccion extends CI_Controller
 	function cargartablasMaterialesSolicitados()
 	{
 		$draw = intval($this->input->get("draw"));
-		$id_funcionario             = $this->session->userdata('id_funcionario');
+		$id_funcionario    = $this->session->userdata('id_funcionario');
 		$valorDependencia  = json_decode(dependenciasFuncionario());		
 		$idDependencia     = $valorDependencia[0]->dependencia;
 		$idSubDependencia  = $valorDependencia[0]->SubDependencia;
 
 		$tipoSolicitud =  "NOR";
 		$estado = 'PEN';
-		
-		if($id_funcionario != 32)
-		{
-			$filas = $this->solicitudes_model->confirmarSolicitudDireccion($idDependencia,$idSubDependencia,$tipoSolicitud,$estado);	
-		}
-		else
-		{
-			$filas = $this->solicitudes_model->confirmarSolicitudDireccionTotal($idDependencia,$tipoSolicitud,$estado);	
-		}
+		$filas = $this->solicitudes_model->confirmarSolicitudDireccion($id_funcionario,$tipoSolicitud,$estado);	
 		
 		
 		$data = array();
@@ -190,23 +182,15 @@ class Confirmar_direccion extends CI_Controller
 		$idSubDependencia  = $valorDependencia[0]->SubDependencia;
 
 		$id_entidad    = $this->session->userdata('id_entidad');
-		$gestion       = $this->session->userdata('gestion');
+		$gestion       = gestion_vigente();
 		$motivo		   = $this->input->post('motivo');
 		$tipoSolicitud = "NOR";
 		$estado        = 'PEN';
 		$tipoCite      = 'SOL';
 		$fechaActual   = getFechaHoraActual();
 
-		if($id_funcionario != 32)
-		{				
-			$filas = $this->solicitudes_model->confirmarSolicitudDireccion($idDependencia,$idSubDependencia,$tipoSolicitud,$estado);
-		}
-		else
-		{
-			$filas = $this->solicitudes_model->confirmarSolicitudDireccionTotal($idDependencia,$tipoSolicitud,$estado);	
-		}
-
 		
+		$filas = $this->solicitudes_model->confirmarSolicitudDireccion($id_funcionario,$tipoSolicitud,$estado);	
 		$data = array();
 		$num = 1;
 		$con = 0;
