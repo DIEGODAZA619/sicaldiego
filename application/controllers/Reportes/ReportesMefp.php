@@ -52,8 +52,9 @@ class ReportesMefp extends CI_Controller
 		$gestion = $this->input->post('gestion');
 		$fecha_fin = $this->input->post('fecIni');
 		$draw = intval($this->input->get("draw"));
-		$filas = $this->reportes_model->getDetalleAlmacenes($gestion,$fecha_fin);	
-		//echo json_encode($filas);
+
+		
+		$filas = $this->reportes_model->getDetalleAlmacenes($gestion,$fecha_fin);			
 		$data = array();
 		$num = 1;
 		$saldo_total = 0;
@@ -63,8 +64,7 @@ class ReportesMefp extends CI_Controller
 		$saldoInicialbs = 0;
 		$precio_entrada = 0;
 	    foreach ($filas as $fila)
-	    {
-		    
+	    {		    
 		    if($fila->tipo_proceso == 'INGI')
 		    {
 		    	$saldoInicial = $fila->cantidad_entrada;		    	
@@ -114,7 +114,10 @@ class ReportesMefp extends CI_Controller
 		$gestion = $this->input->post('gestion');
 		$fecha_fin = $this->input->post('fecIni');
 		$draw = intval($this->input->get("draw"));
-		$filas = $this->reportes_model->getResumenValoradoPartida($gestion, $fecha_fin);	
+
+		$gestion  = 2023;
+		$fecha_fin = '2023-04-18';
+		$filas = $this->reportes_model->getResumenValoradoPartida($gestion, $fecha_fin);		
 		$data = array();
 		$num = 1;
 		$salgo_total = 0;

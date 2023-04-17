@@ -77,7 +77,7 @@ class Reportes_model extends CI_Model
 		$query = $this->db_almacen->query("select  m.id_material,
 											       m.codigo_material,
 											       m.codigo_categoria,
-											       substring(m.codigo_categoria,0,6) as codigo_partida,
+											       substring(m.codigo_categoria,1,5) as codigo_partida,
 											       m.descripcion_unidad,
 											       m.descripcion_material,											           
 											       case when (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGI'  and i.id_material = m.id_material) is not null 
@@ -86,17 +86,17 @@ class Reportes_model extends CI_Model
 											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGI'  and i.id_material = m.id_material) is not null 
 											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGI'  and i.id_material = m.id_material) else 0 end as saldo_inicial_valorado,
 											            	
-											       case when (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
-											            then (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as ingreso_fisico,
+											       case when (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
+											            then (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as ingreso_fisico,
 
-											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
-											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as ingreso_fisico_valorado,     
+											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
+											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as ingreso_fisico_valorado,     
 											  	
-											       case when (select sum(i.cantidad_salida) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
-											            then (select sum(i.cantidad_salida) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as salida_fisico,
+											       case when (select sum(i.cantidad_salida) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
+											            then (select sum(i.cantidad_salida) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as salida_fisico,
 
-											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
-											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as salida_fisico_valorado
+											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
+											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as salida_fisico_valorado
 											            
 											  from materiales_inventario m
 											 where m.gestion = ".$gestion."
@@ -119,7 +119,7 @@ class Reportes_model extends CI_Model
 											select m.id_material,
 											       m.codigo_material,
 											       m.codigo_categoria,
-											       substring(m.codigo_categoria,0,6) as codigo_partida,
+											       substring(m.codigo_categoria,1,5) as codigo_partida,
 											       m.descripcion_unidad,
 											       m.descripcion_material,
 											           
@@ -129,17 +129,17 @@ class Reportes_model extends CI_Model
 											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGI'  and i.id_material = m.id_material) is not null 
 											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGI'  and i.id_material = m.id_material) else 0 end as saldo_inicial_valorado,
 											            	
-											       case when (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
-											            then (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as ingreso_fisico,
+											       case when (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
+											            then (select sum(i.cantidad_entrada) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as ingreso_fisico,
 
-											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
-											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as ingreso_fisico_valorado,     
+											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
+											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_proceso = 'INGP' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as ingreso_fisico_valorado,     
 											  	
-											       case when (select sum(i.cantidad_salida) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
-											            then (select sum(i.cantidad_salida) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as salida_fisico,
+											       case when (select sum(i.cantidad_salida) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
+											            then (select sum(i.cantidad_salida) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as salida_fisico,
 
-											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
-											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro::date <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as salida_fisico_valorado
+											       case when (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) is not null 
+											            then (select sum(i.precio_total) from inventarios i where i.gestion = m.gestion and i.tipo_ingreso_egreso = 'SOLM' and i.fecha_registro <= '".$fecha_fin."' and i.id_material = m.id_material) else 0 end as salida_fisico_valorado
 											            
 											  from materiales_inventario m
 											 where m.gestion = ".$gestion."
@@ -160,15 +160,15 @@ class Reportes_model extends CI_Model
 															i.cantidad_entrada,
 															i.precio_total,
 													       case when (select sum(cantidad_salida) from inventarios inv where inv.tipo_ingreso_egreso = 'SOLM' and inv.id_inventario_ingresos = i.id) is not null 
-														    then (select sum(cantidad_salida) from inventarios inv where inv.tipo_ingreso_egreso = 'SOLM' and inv.id_inventario_ingresos = i.id and inv.fecha_registro::date <= '".$fecha_fin."') else 0 end as cantidadSalida,
+														    then (select sum(cantidad_salida) from inventarios inv where inv.tipo_ingreso_egreso = 'SOLM' and inv.id_inventario_ingresos = i.id and inv.fecha_registro <= '".$fecha_fin."') else 0 end as cantidadsalida,
 													       case when (select sum(precio_total) from inventarios inv where inv.tipo_ingreso_egreso = 'SOLM' and inv.id_inventario_ingresos = i.id) is not null 
-														    then (select sum(precio_total) from inventarios inv where inv.tipo_ingreso_egreso = 'SOLM' and inv.id_inventario_ingresos = i.id and inv.fecha_registro::date <= '".$fecha_fin."') else 0 end as valorSalida
+														    then (select sum(precio_total) from inventarios inv where inv.tipo_ingreso_egreso = 'SOLM' and inv.id_inventario_ingresos = i.id and inv.fecha_registro <= '".$fecha_fin."') else 0 end as valorsalida
 													  from inventarios i,
 													       materiales_inventario m
 													 where m.id_material = i.id_material
 													   and i.gestion = ".$gestion."
 													   and i.tipo_proceso IN ('INGP','INGI')													  
-													   and i.fecha_registro::date <= '".$fecha_fin."'													   
+													   and i.fecha_registro <= '".$fecha_fin."'													   
 													order by i.id_material,i.id asc");
         return $query->result(); 
 	}
