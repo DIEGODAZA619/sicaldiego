@@ -110,10 +110,12 @@ class Materiales extends CI_Controller
 	{
 		$accion = $this->input->post('texto');
 		$gestion = gestion_vigente();
+		$id_entidad = $this->session->userdata('id_entidad');
 		if($accion== 'Editar')
 		{
 			$id_registro = $this->input->post('id_material');
 			$datos = array (
+				
 				'codigo' => $this->input->post('txtcodigo'),
 				'descripcion' => $this->input->post('txtdescripcion'),
 				'id_unidad' => $this->input->post('cbunidad'),
@@ -128,7 +130,7 @@ class Materiales extends CI_Controller
 		else
 		{
 			$datos = array (
-				'id_entidad' =>1,
+				'id_entidad' =>$id_entidad,
 				'codigo' => $this->input->post('txtcodigo'),
 				'descripcion' => $this->input->post('txtdescripcion'),
 				'id_unidad' => $this->input->post('cbunidad'),
@@ -140,7 +142,7 @@ class Materiales extends CI_Controller
 			if($insert)
 			{
 				$datosInventario = array (
-					'id_entidad'          => 1,
+					'id_entidad'          => $id_entidad,
 					'gestion'             => $gestion,
 					'id_material'         => $insert,
 					'cantidad_entrada'    => 0,

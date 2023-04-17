@@ -163,8 +163,7 @@ class Materiales_model extends CI_Model
 	{
         $query = $this->db_almacen->query("select T0.id as id_3 , T0.codigo as codigo_3
 			,T1.id as id_2, T1.codigo as codigo_2 , T1.sigla
-			,T2.id as id_1 ,T2.codigo as codigo_1
-			--, cast(replace(T3.codigo , T1.sigla,'') as integer) + 1 numero
+			,T2.id as id_1 ,T2.codigo as codigo_1			
 			from categorias T0 
 			inner join categorias T1 on T1.id = T0.padre
 			inner join categorias T2 on T2.id = T1.padre

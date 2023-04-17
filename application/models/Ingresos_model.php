@@ -72,11 +72,12 @@ class Ingresos_model extends CI_Model
 											  and estado = 'AC'");
         return $query->result();   
 	}
-	function getProveedores()
+	function getProveedores($id_entidad)
 	{
 		$query = $this->db_almacen->query("select *
 											 from proveedores i
 											where estado = 'AC'
+											  and id_entidad = ".$id_entidad."
 											order by nombre_proveedor asc"
 
 											 );
@@ -97,10 +98,10 @@ class Ingresos_model extends CI_Model
 		$query = $this->db_almacen->query("select i.*, m.codigo, m.descripcion , c.codigo as partida ,  ii.fecha_ingreso, ii.id as codigo_ingreso , ii.descripcion_ingreso, 
 			(select p.nombre_proveedor from proveedores p Where p.id=ii.id_provedor ) as proveedor ,
 			(select p.nit from proveedores p Where p.id=ii.id_provedor ) as nit ,
-			(select p.descripcion from  clasificacion.unidades_medida p Where p.id= m.id_unidad ) as unidad
+			(select p.descripcion from  unidades_medida p Where p.id= m.id_unidad ) as unidad
 											 from ingresos_detalle i, 
 											      materiales m , 
-											      clasificacion.categorias c, 
+											      categorias c, 
 											      ingresos ii
 											where i.id_material = m.id
 											  and i.id_ingreso = ii.id 

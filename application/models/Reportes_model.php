@@ -51,11 +51,12 @@ class Reportes_model extends CI_Model
 
 	function getIngresosFechas($fecha_inicio, $fecha_fin)
 	{
+		
 		$query = $this->db_almacen->query("select *
 											  from ingresos i, total_precio_ingreso t
 											 where i.id = t.id_ingreso
 											   and i.estado = 'AC'
-											   and fecha_ingreso::date between '".$fecha_inicio."' and '".$fecha_fin."'
+											   and fecha_ingreso between '".$fecha_inicio."' and '".$fecha_fin."'
 											 order by correlativo asc ");
         return $query->result(); 
 	}
@@ -66,7 +67,7 @@ class Reportes_model extends CI_Model
 											  from solicitud_direccion s, total_precio_salida t
 											 where s.id = t.id_salida
 											   and estado = 'ENT'
-											   and fecha_entrega::date between '".$fecha_inicio."' and '".$fecha_fin."'
+											   and fecha_entrega between '".$fecha_inicio."' and '".$fecha_fin."'
 											 order by correlativo asc");
         return $query->result(); 
 	}

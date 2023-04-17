@@ -41,6 +41,17 @@ function cargarTablaIngresos()
 {
     var inicio = $('#txtfecha_inicio').val();
     var fin    = $('#txtfecha_fin').val();
+
+    /*var enlace = base_url + "Reportes/IngresosSalidas/cargarTablaIngresos";
+    $.ajax({
+        type: "POST",
+        url: enlace,
+        data: {fecIni: inicio, fecFin: fin},
+        success: function(data)
+        {
+            alert(data);            
+        }
+    });*/
     var enlace = base_url + "Reportes/IngresosSalidas/cargarTablaIngresos";
     $('#idTablaResultadosIngresos').DataTable({
         destroy: true,

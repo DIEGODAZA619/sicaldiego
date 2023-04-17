@@ -105,7 +105,6 @@
     $(document).ready(function(){
         var enlace = "<?php echo  base_url() ?>";
         baseurl(enlace);
-        cargarfunciones('<?php echo  $tipo_solicitud;?>'); 
         
     });
 </script>

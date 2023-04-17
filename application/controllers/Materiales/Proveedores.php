@@ -38,7 +38,8 @@ class Proveedores extends CI_Controller
 	function cargartablasProveedores()
 	{
 		$draw = intval($this->input->get("draw"));
-		$filas = $this->proveedores_model->getProveedores();
+		$id_entidad = $this->session->userdata('id_entidad');
+		$filas = $this->proveedores_model->getProveedores($id_entidad);
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)
@@ -70,6 +71,7 @@ class Proveedores extends CI_Controller
 	function guardarProveedores()
 	{
 		$accion = $this->input->post('texto');
+		$id_entidad = $this->session->userdata('id_entidad');
 		if($accion== 'Editar')
 		{
 			$id_registro = $this->input->post('id_proveedor');
@@ -82,6 +84,7 @@ class Proveedores extends CI_Controller
 				'celular' => $this->input->post('celular'),
 				'direccion' => $this->input->post('direccion'),
 				'observaciones' => $this->input->post('observacion'),
+				'id_entidad' => $id_entidad,
 				'fecha_modificacion' => date('Y-m-d H:i:s')
 			);
 			$insert = $this->proveedores_model->editarProveedor($id_registro,$datos);

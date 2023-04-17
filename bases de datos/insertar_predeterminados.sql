@@ -1,3 +1,15 @@
+INSERT INTO correlativos_gestion (id_correlativo,gestion,correlativo) VALUES
+(1,2023,0),
+(2,2023,0),
+(3,2023,0);
+
+
+INSERT INTO correlativos (nombre_cite,abreviatura,descripcion,estado) VALUES
+('INGRESO MATERIAL','INM','CORRELATIVO DE INGRESO MATERIAL','AC'),
+('SOLICITUD MATERIAL','SOL','CORRELATIVO DE SOLICITUD MATERIAL','AC'),
+('ENTREGA MATERIAL','ENT','CORRELATIVO DE ENTREGA MATERIAL','AC');
+
+
 INSERT INTO unidades_medida (codigo,descripcion) VALUES
 ('CJA','CAJA'),
 ('CNT','CINTA'),
