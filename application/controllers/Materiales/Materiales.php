@@ -102,8 +102,8 @@ class Materiales extends CI_Controller
 		$option = "<option VALUE='-1'>Seleccionar opcion</OPTION>";
 		foreach ($filas as $fila)
 		{
-			//$option.="<option value = '".$fila->id."'>".$fila->descripcion."</option>";
-			$option.= $fila->codigo.";".$fila->descripcion."<br>";
+			$option.="<option value = '".$fila->id."'>".$fila->descripcion."</option>";
+			//$option.= $fila->codigo.";".$fila->descripcion."<br>";
 		}
 		echo $option;
 	}
