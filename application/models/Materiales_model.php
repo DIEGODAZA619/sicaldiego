@@ -94,7 +94,8 @@ class Materiales_model extends CI_Model
 	function getUnidad()
 	{
 		$query = $this->db_almacen->query("select *
-											from unidades_medida um");
+											from unidades_medida um
+											order by um.descripcion asc");
         return $query->result();
 	}
 	function guardarMaterial($data)

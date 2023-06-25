@@ -14,7 +14,7 @@ class Categorias_model extends CI_Model
 	{
 		$query = $this->db_almacen->query("select *
 											from categorias c 
-											order by id asc");
+											order by c.descripcion asc");
         return $query->result();
 	}
 	function guardarCategoria($data)
