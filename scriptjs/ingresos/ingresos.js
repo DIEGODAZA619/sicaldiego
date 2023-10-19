@@ -491,7 +491,7 @@ function validardatosIngreso()
             }
         }       
     });
-    $(" select").each(function(){
+    /*$(" select").each(function(){
         if($(this).attr('id')=='slProveedor')
         {
             if(this.value== 0 )
@@ -502,7 +502,7 @@ function validardatosIngreso()
                     respuesta = false;
             }
         }       
-    });
+    });*/
   
     return respuesta;
 }

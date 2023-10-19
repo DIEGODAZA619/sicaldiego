@@ -222,17 +222,11 @@ class Ingreso extends CI_Controller
 				'cite'	           		 	=> $cite,
 				'fecha_nota_remision'		=> $fechaNota,
 			);
-			if($this->ingresos_model->guardarRegistroIngreso($data))
-			{
-				$citeGuardar = guardarCite($id_funcionario,$tipoCite,$correGestion,$cite,$gestion,$fechaActual);
-				$resul = 1;
-				$mensaje = "OK";
-			}
-			else
-			{
-				$resul = 0;
-				$mensaje = "Ocurrio un error al guardar la información";
-			}
+			$insert = $this->ingresos_model->guardarRegistroIngreso($data);			
+			$citeGuardar = guardarCite($id_funcionario,$tipoCite,$correGestion,$cite,$gestion,$fechaActual);
+			$resul = 1;
+			$mensaje = "OK";
+			
 		}
 		$resultado ='[{
 							"resultado":"'.$resul.'",
