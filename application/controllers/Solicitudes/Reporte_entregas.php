@@ -233,7 +233,7 @@ class Reporte_entregas extends CI_Controller
 		$organizacion = nombre_estructura($idDependencia);
 		if($idSubDependencia >0)
 		{
-			$organizacion = sigla_estrucctura($idDependencia);
+			$organizacion = "";//sigla_estrucctura($idDependencia);
 			$organizacion = $organizacion." / ".nombre_subestructura($idSubDependencia);
 		}
 		$organizacion = trim($organizacion);

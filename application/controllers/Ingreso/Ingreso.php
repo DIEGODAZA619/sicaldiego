@@ -42,6 +42,7 @@ class Ingreso extends CI_Controller
 	function cargarProveedores()
 	{
 		$id_entidad = $this->session->userdata('id_entidad');
+		
 		$filas = $this->ingresos_model->getProveedores($id_entidad);
 		$options = "<option value = '0'>---</option>";
 		foreach ($filas as $fila) {
@@ -53,7 +54,7 @@ class Ingreso extends CI_Controller
 	function cargarTablaIngresos()
 	{
 		$draw = intval($this->input->get("draw"));
-		$id_entidad = $this->session->userdata('id_entidad');
+		$id_entidad = 1;
 		$estado = 'ELB';
 		$filas = $this->ingresos_model->getIngresos($id_entidad,$estado);
 		$data = array();
@@ -193,7 +194,7 @@ class Ingreso extends CI_Controller
 		$fechaActual    = getFechaActual();
 		$id_funcionario = $this->session->userdata('id_funcionario');
 		$gestion = gestion_vigente();
-		$id_entidad = $this->session->userdata('id_entidad');
+		$id_entidad = 1;
 
 		$resul = 1;
 		$mensaje = "OK";
@@ -222,11 +223,17 @@ class Ingreso extends CI_Controller
 				'cite'	           		 	=> $cite,
 				'fecha_nota_remision'		=> $fechaNota,
 			);
-			$insert = $this->ingresos_model->guardarRegistroIngreso($data);			
-			$citeGuardar = guardarCite($id_funcionario,$tipoCite,$correGestion,$cite,$gestion,$fechaActual);
-			$resul = 1;
-			$mensaje = "OK";
-			
+			if($this->ingresos_model->guardarRegistroIngreso($data))
+			{
+				$citeGuardar = guardarCite($id_funcionario,$tipoCite,$correGestion,$cite,$gestion,$fechaActual);
+				$resul = 1;
+				$mensaje = "OK";
+			}
+			else
+			{
+				$resul = 0;
+				$mensaje = "Ocurrio un error al guardar la información";
+			}
 		}
 		$resultado ='[{
 							"resultado":"'.$resul.'",
@@ -245,12 +252,10 @@ class Ingreso extends CI_Controller
 		$fechaActual = getFechaHoraActual();
 		$id_funcionario = $this->session->userdata('id_funcionario');
 		$total = $cantidad * $precio;
-		$id_entidad = $this->session->userdata('id_entidad');
 
 		if($accion == 'nuevo')
 		{
 			$data = array(
-				'id_entidad' => $id_entidad,
 				'id_ingreso' => $id_ingreso,
 				'id_material' => $id_material,
 				'cantidad_ingreso' => $cantidad,

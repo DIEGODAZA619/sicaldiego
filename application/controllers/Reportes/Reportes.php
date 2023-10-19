@@ -53,8 +53,7 @@ class Reportes extends CI_Controller
 
 	{
 		$draw = intval($this->input->get("draw"));
-		$id_entidad = $this->session->userdata('id_entidad');	
-		$filas = $this->solicitudes_model->getMaterialesInventario($id_entidad);
+		$filas = $this->solicitudes_model->getMaterialesInventario();
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)

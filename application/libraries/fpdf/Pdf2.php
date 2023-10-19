@@ -48,8 +48,8 @@ class Pdf2 extends FPDF {
         //CABECERA PARA LA LISTA DE ENTIDADES
         if($this->opcion_cabecera==1)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-            //$this->Image('resources/images/logos/chakana.png', 165, 5, 38);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
+            $this->Image('resources/images/logos/chakana.png', 165, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
             $this->SetFont('Times','B',14);
@@ -73,8 +73,8 @@ class Pdf2 extends FPDF {
         //CABECERA PARA LA LISTA DE  SOLICITUDES CONFIRMADAS
         if($this->opcion_cabecera==2)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-            //$this->Image('resources/images/logos/chakana.png', 165, 5, 38);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
+            $this->Image('resources/images/logos/chakana.png', 165, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
             $this->SetFont('Times','B',14);
@@ -105,8 +105,8 @@ class Pdf2 extends FPDF {
 
         if($this->opcion_cabecera==3)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-            //$this->Image('resources/images/logos/chakana.png', 165, 5, 38);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
+            $this->Image('resources/images/logos/chakana.png', 165, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
             $this->SetFont('Times','B',12);
@@ -138,8 +138,8 @@ class Pdf2 extends FPDF {
         //  Reporte Ingresos
         if($this->opcion_cabecera==4)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-            //$this->Image('resources/images/logos/chakana.png', 165, 5, 38);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
+            $this->Image('resources/images/logos/chakana.png', 165, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
             $this->SetFont('Times','B',14);
@@ -170,8 +170,8 @@ class Pdf2 extends FPDF {
 
         if($this->opcion_cabecera==5)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-            //$this->Image('resources/images/logos/chakana.png', 165, 5, 38);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
+            $this->Image('resources/images/logos/chakana.png', 165, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
             $this->SetFont('Times','B',12);
@@ -200,8 +200,8 @@ class Pdf2 extends FPDF {
         }
         if($this->opcion_cabecera==6)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-            //$this->Image('resources/images/logos/chakana.png', 165, 5, 38);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
+            $this->Image('resources/images/logos/chakana.png', 165, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
             $this->SetFont('Times','B',12);
@@ -226,8 +226,8 @@ class Pdf2 extends FPDF {
         }
         if($this->opcion_cabecera==7)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-            //$this->Image('resources/images/logos/chakana.png', 165, 5, 38);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
+            $this->Image('resources/images/logos/chakana.png', 165, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
             $this->SetFont('Times','B',12);
@@ -253,7 +253,7 @@ class Pdf2 extends FPDF {
 
         if($this->opcion_cabecera==8)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
             $this->Image('resources/images/logos/chakana.png', 210, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
@@ -300,8 +300,8 @@ class Pdf2 extends FPDF {
 
         if($this->opcion_cabecera==9)
         {
-            //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-            //$this->Image('resources/images/logos/chakana.png', 210, 5, 38);
+            $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 50);
+            $this->Image('resources/images/logos/chakana.png', 210, 5, 38);
             $this->Ln();
             $this->SetTextColor(0);
             $this->SetFont('Times','B',12);

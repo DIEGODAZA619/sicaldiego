@@ -63,7 +63,7 @@
           <span id="nombre-sistema">SISTEMA DE CONTROL DE ALMACENES</span>
           <div class="container-fluid clearfix">
             <span class="float-right">
-                <a href="#">SISTEMAS-ALDIDASOFT</a> &copy; 2023
+                <a href="#">SISTEMAS-SENAPE</a> &copy; 2023
             </span>
           </div>
         </footer>

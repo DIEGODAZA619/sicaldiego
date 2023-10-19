@@ -56,6 +56,7 @@
             <div class="col-6" >
                 <span id="orden_compra"></span><span id="proveedor"></span>
                                            <span id="descripcion"></span>
+                                           <span id="fechaIngreso"></span>
                 
             </div>
            <!-- <div class="col-6"><a class="btn btn-warning " href="#idTablaMaterial">SELECCIONA MATERIALES PARA ESTA ORDEN DE COMPRA</a></div>-->

@@ -46,11 +46,11 @@ class Pdf3 extends FPDF_OFICIO {
 
         if($this->opcion_cabecera==10)
         {
-            //$this->Image('resources/images/logos/senape.png', 35, 20, 40);
+            $this->Image('resources/images/logos/senape.png', 35, 20, 40);
             $this->SetY(20);
             $this->SetFont('Arial', 'B', 8);
             $this->SetTextColor(0);
-            $this->Cell(305, 6, 'DGCF - R1.05', 0, 1, 'R');
+            $this->Cell(305, 6, 'DGCF - R1.06', 0, 1, 'R');
             $this->Cell(305, 0, utf8_decode('Versión 01'), 0, 0, 'R');     
 
             //$this->Image('resources/images/logos/chakana.png', 210, 5, 38);
@@ -111,7 +111,7 @@ class Pdf3 extends FPDF_OFICIO {
 
         if($this->opcion_cabecera==11)
         {
-            //$this->Image('resources/images/logos/senape.png', 42, 20, 40);
+            $this->Image('resources/images/logos/senape.png', 42, 20, 40);
             $this->SetY(20);
             $this->SetFont('Arial', 'B', 8);
             $this->SetTextColor(0);

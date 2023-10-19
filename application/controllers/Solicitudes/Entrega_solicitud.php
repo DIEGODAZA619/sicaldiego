@@ -45,8 +45,8 @@ class Entrega_solicitud extends CI_Controller
 	function cargartablaSolicitudesConfirmadas()
 	{
 		$draw = intval($this->input->get("draw"));
-		$estado = 'AUT';
 		$id_entidad = $this->session->userdata('id_entidad');
+		$estado = 'AUT';
 		$filas = $this->solicitudes_model->getSolicitudesConfirmadasPorDireccion($id_entidad,$estado);
 		$data = array();
 		$num = 1;
@@ -136,7 +136,8 @@ class Entrega_solicitud extends CI_Controller
 		$data = array(	    				
 	    				'fecha_entrega' => $fechaActual,	    				
 	    				'estado' => 'ENT'
-		    		 );
+		    		 );	
+
 		$dataSol = array(	    				
 	    				'fecha_entrega' => $fechaActual,
 	    				'id_funcionario_entregas' => $id_funcionario,
@@ -150,7 +151,8 @@ class Entrega_solicitud extends CI_Controller
 	    	$idFuncionarioSol	= $fila->id_funcionario;	    	
 	    	$idMaterial 		= $fila->id_material;
 	    	$cantidadAutorizada = $fila->cantidad_autorizada;
-	    	$registroInvetario = $this->registroMaterialInventario($id_solicitud,$id_confirmacion_direccion,$idMaterial,$cantidadAutorizada,$idFuncionarioSol);
+
+	    	$registroInvetario = $this->registroMaterialInventario($id_solicitud,$id_confirmacion_direccion,$idMaterial,$cantidadAutorizada,$idFuncionarioSol);	    	
 	    	$update 			= $this->solicitudes_model->editarSolicitudMaterialDetalles($id_solicitud,$data);
 	    }
 	    $update = $this->solicitudes_model->editarConfirmaciónSolicitudMaterialDetalles($idConfirmacion,$dataSol);

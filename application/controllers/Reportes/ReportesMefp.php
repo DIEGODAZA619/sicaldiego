@@ -52,9 +52,8 @@ class ReportesMefp extends CI_Controller
 		$gestion = $this->input->post('gestion');
 		$fecha_fin = $this->input->post('fecIni');
 		$draw = intval($this->input->get("draw"));
-
-		
-		$filas = $this->reportes_model->getDetalleAlmacenes($gestion,$fecha_fin);			
+		$filas = $this->reportes_model->getDetalleAlmacenes($gestion,$fecha_fin);	
+		//echo json_encode($filas);
 		$data = array();
 		$num = 1;
 		$saldo_total = 0;
@@ -64,7 +63,8 @@ class ReportesMefp extends CI_Controller
 		$saldoInicialbs = 0;
 		$precio_entrada = 0;
 	    foreach ($filas as $fila)
-	    {		    
+	    {
+		    
 		    if($fila->tipo_proceso == 'INGI')
 		    {
 		    	$saldoInicial = $fila->cantidad_entrada;		    	
@@ -114,10 +114,7 @@ class ReportesMefp extends CI_Controller
 		$gestion = $this->input->post('gestion');
 		$fecha_fin = $this->input->post('fecIni');
 		$draw = intval($this->input->get("draw"));
-
-		$gestion  = 2023;
-		$fecha_fin = '2023-04-18';
-		$filas = $this->reportes_model->getResumenValoradoPartida($gestion, $fecha_fin);		
+		$filas = $this->reportes_model->getResumenValoradoPartida($gestion, $fecha_fin);	
 		$data = array();
 		$num = 1;
 		$salgo_total = 0;
@@ -156,7 +153,7 @@ class ReportesMefp extends CI_Controller
         $pdf->SetAutoPageBreak(true, 30);
         $pdf->SetMargins(40,15,10);
 		$pdf->SetTitle(utf8_decode("Lista Reporte de Almacen"));
-		$pdf->tituloCabecera     = 'ALDIDASOFT';
+		$pdf->tituloCabecera     = 'SERVICIO NACIONAL DE PATRIMONIO DEL ESTADO';
 		$pdf->tituloCabeceraDos  = 'RESUMEN DE ALMACENES (BIENES DE CONSUMO)';
 		$pdf->subtituloCabecera1 = "AL: ".fechacompleta2($fechaFin);  
 		$pdf->subtituloCabecera2 = "(Expresado en Bolivianos)";
@@ -241,8 +238,8 @@ class ReportesMefp extends CI_Controller
         $pdf->SetAutoPageBreak(true, 25);
         $pdf->SetMargins(35,15,10);		
 		$pdf->SetTitle(utf8_decode("Lista Reporte de Almacen"));
-		$pdf->tituloCabecera     = 'SISTEMA DE CONTROL DE ALMACENES';
-		$pdf->tituloCabeceraDos  = 'ALDIDASOFT';
+		$pdf->tituloCabecera     = 'MINISTERIO DE ECONOMÍA Y FINANZAS PÚBLICAS';
+		$pdf->tituloCabeceraDos  = 'D.A 6 - SERVICIO NACIONAL DE PATRIMONIO DEL ESTADO';
 		$pdf->tituloCabeceraTres = 'RESUMEN DE ALMACENES (BIENES DE CONSUMO)';
 		$pdf->subtituloCabecera1 = "AL: ".fechacompleta2($fechaFin);  
 		$pdf->subtituloCabecera2 = "(Expresado en Bolivianos)";  

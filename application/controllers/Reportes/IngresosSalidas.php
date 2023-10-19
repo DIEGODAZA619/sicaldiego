@@ -54,11 +54,8 @@ class IngresosSalidas extends CI_Controller
 		$fecha_inicio = $this->input->post('fecIni');
 		$fecha_fin 	  = $this->input->post('fecFin');
 
-		$filas = $this->reportes_model->getIngresosFechas($fecha_inicio, $fecha_fin);	
-		//echo $fecha_fin;
-
 		$draw = intval($this->input->get("draw"));
-		
+		$filas = $this->reportes_model->getIngresosFechas($fecha_inicio, $fecha_fin);	
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)

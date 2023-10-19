@@ -102,11 +102,12 @@ class Confirmar_direccion extends CI_Controller
 		$idDependencia     = $valorDependencia[0]->dependencia;
 		$idSubDependencia  = $valorDependencia[0]->SubDependencia;
 
+		
 		$tipoSolicitud =  "NOR";
-		$estado = 'PEN';
-		$filas = $this->solicitudes_model->confirmarSolicitudDireccion($id_funcionario,$tipoSolicitud,$estado);	
+		$estado = 'PEN';	
 		
 		
+		$filas = $this->solicitudes_model->confirmarSolicitudDireccionTotal($idDependencia,$tipoSolicitud,$estado);	
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)
@@ -182,15 +183,15 @@ class Confirmar_direccion extends CI_Controller
 		$idSubDependencia  = $valorDependencia[0]->SubDependencia;
 
 		$id_entidad    = $this->session->userdata('id_entidad');
-		$gestion       = gestion_vigente();
+		$gestion       = $this->session->userdata('gestion');
 		$motivo		   = $this->input->post('motivo');
 		$tipoSolicitud = "NOR";
 		$estado        = 'PEN';
 		$tipoCite      = 'SOL';
 		$fechaActual   = getFechaHoraActual();
 
+		$filas = $this->solicitudes_model->confirmarSolicitudDireccionTotal($idDependencia,$tipoSolicitud,$estado);	
 		
-		$filas = $this->solicitudes_model->confirmarSolicitudDireccion($id_funcionario,$tipoSolicitud,$estado);	
 		$data = array();
 		$num = 1;
 		$con = 0;

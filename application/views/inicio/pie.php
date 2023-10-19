@@ -4,7 +4,7 @@
               <footer class="footer">
                   <div class="container-fluid clearfix">
                       <span class="float-right">
-                          <a href="#">SISTEMAS-ALDIDASOFT</a> &copy; 2023
+                          <a href="#">SISTEMAS-SENAPE</a> &copy; 2023
                       </span>
                   </div>
               </footer>
@@ -25,7 +25,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <video src="<?php echo  base_url() ?>upload/video/tutorial.mp4" width="100%" height="100%" controls></video>
+                
             </div>
         </div>
     </div>

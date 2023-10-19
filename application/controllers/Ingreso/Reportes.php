@@ -305,8 +305,8 @@ class Reportes extends CI_Controller
  function Header()
  {
  	$table=new easyTable($pdf, '%{50,50}','align:{LR};width:190; border:1');
-	//$table->easyCell('', 'img:resources/images/logos/logo_senape_reporte.png, h14, w70;align:L;');
-	//$table->easyCell('', 'img:resources/images/logos/chakana.png, w58, h18 ;align:R');
+	$table->easyCell('', 'img:resources/images/logos/logo_senape_reporte.png, h14, w70;align:L;');
+	$table->easyCell('', 'img:resources/images/logos/chakana.png, w58, h18 ;align:R');
 	$table->printRow(true);
 	$table->endTable(2);
 	$pdf->SetMargins(-10,15,-10);

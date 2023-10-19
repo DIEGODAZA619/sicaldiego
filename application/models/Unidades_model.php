@@ -14,7 +14,7 @@ class Unidades_model extends CI_Model
 	{
 		$query = $this->db_almacen->query("select *
 											from unidades_medida um
-											 order by um.unidades_medida asc ");
+											 order by um.descripcion asc ");
         return $query->result();
 	}
 	function guardarUnidad($data)

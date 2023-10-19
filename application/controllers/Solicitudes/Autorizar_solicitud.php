@@ -46,7 +46,7 @@ class Autorizar_solicitud extends CI_Controller
 	{
 		$draw = intval($this->input->get("draw"));
 		$estado = 'APB';
-		$id_entidad        = $this->session->userdata('id_entidad');
+		$id_entidad = $this->session->userdata('id_entidad');
 		$filas = $this->solicitudes_model->getSolicitudesConfirmadasPorDireccion($id_entidad,$estado);
 		$data = array();
 		$num = 1;

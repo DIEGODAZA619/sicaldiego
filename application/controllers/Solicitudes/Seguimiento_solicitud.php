@@ -61,9 +61,8 @@ class Seguimiento_solicitud extends CI_Controller
 		
 
 		$draw = intval($this->input->get("draw"));
-		
+		$id_entidad = $id_usuario = $this->session->userdata('id_entidad');
 		$estado = $this->input->post('est');
-		$id_entidad = $this->session->userdata('id_entidad');
 		$filas = $this->solicitudes_model->getSolicitudesConfirmadasPorDireccion($id_entidad,$estado);
 		$data = array();
 		$num = 1;

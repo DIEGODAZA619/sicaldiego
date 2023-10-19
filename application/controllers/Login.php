@@ -7,7 +7,7 @@ class Login extends CI_Controller
 			$this->load->helper('configuraciones_helper');
 			$this->load->model('usuarios_model');
 			$this->load->model('roles_model');
-			$this->load->model('puestos_model');
+			$this->load->model('puestos_model');    
     		$this->load->helper(array('form', 'url'));
 			$this->load->library('form_validation');
 	}
@@ -21,14 +21,10 @@ class Login extends CI_Controller
 	}
 	function logued()
 	{
-		
-		//4f177090371d97d6620aeae8ed4740ee 
-		$IDAPLICACION = $this->config->item('IDAPLICACION');		
-		$texto = $this->config->item('TEXTO');
-		$username = ($this->input->post('username'));		
-		$password =  $texto.$this->input->post('pass');
-		$password =  md5($password);
-
+		$IDAPLICACION = $this->config->item('IDAPLICACION');
+		$IDENTIDAD = 1;
+		$username = ($this->input->post('username'));
+		$password =  md5(($this->input->post('pass')));
 		$ip = $this->obtenerIp();
 		//echo $username." - ".$password;
 		$login = $this->usuarios_model->loguear($username, $password);
@@ -46,43 +42,71 @@ class Login extends CI_Controller
 				$persona = datos_persona($login[0]->id_persona);
 				$id_usuario = $login[0]->id;
 				$id_persona = $login[0]->id_persona;
-				$id_entidad = $login[0]->id_entidad;
 				$rolescero = $this->roles_model->obtener_roles_cero($id_usuario,$IDAPLICACION);
 				$roles     = $this->roles_model->obtener_roles($id_usuario,$IDAPLICACION);				
 				
 				$lista_puestos = $this->puestos_model->listaPuestos($id_persona);
 
-				if($lista_puestos)
-				{
-					$data = array(
+				if(count($lista_puestos)==1){
+					$id_puesto_secundario = '';
+					$puesto_secundario = '';
+					$numero_item_secundario = '';
+					$id_dependencia_secundario = '';
+					$id_subdependencia_secundario = '';
+					$nivel_dependencia_secundario = '';
+				} else {
+					if($lista_puestos[1]->nivel_dependencia==''){
+						$id_puesto_secundario = $lista_puestos[1]->id_puesto;
+						$puesto_secundario = $lista_puestos[1]->nombre_puesto;
+						$numero_item_secundario = $lista_puestos[1]->numero_item;
+						$id_dependencia_secundario = $lista_puestos[1]->id_dependencia;
+						$id_subdependencia_secundario = $lista_puestos[1]->id_subdependencia;
+						$nivel_dependencia_secundario = $lista_puestos[1]->nivel_dependencia;
+					} else {
+						if($lista_puestos[1]->depjerarquica_estado=='AC'){
+							$id_puesto_secundario = $lista_puestos[1]->id_puesto;
+							$puesto_secundario = $lista_puestos[1]->nombre_puesto;
+							$numero_item_secundario = $lista_puestos[1]->numero_item;
+							$id_dependencia_secundario = $lista_puestos[1]->id_dependencia;
+							$id_subdependencia_secundario = $lista_puestos[1]->id_subdependencia;
+							$nivel_dependencia_secundario = $lista_puestos[1]->nivel_dependencia;
+						} else {
+							$id_puesto_secundario = '';
+							$puesto_secundario = '';
+							$numero_item_secundario = '';
+							$id_dependencia_secundario = '';
+							$id_subdependencia_secundario = '';
+							$nivel_dependencia_secundario = '';
+						}
+					}
+				}
+
+				$data = array(
 					'is_logued_in'  => TRUE,
 					'id_usuario' => $id_usuario,
 					'id_funcionario' => $login[0]->id_persona,
 					'rolescero' => $rolescero,
-					//'sede' => $lista_puestos[0]->sede_trabajo,
+					'sede' => $lista_puestos[0]->sede_trabajo,
 					'roles' => $roles,
 					'gestion' => gestion_vigente(),
 					'nombre_completo' => $persona[0]->nombres." ".$persona[0]->primer_apellido." ".$persona[0]->segundo_apellido,
-
 					'id_puesto_principal' => $lista_puestos[0]->id_puesto,
-					'puesto_principal' => $lista_puestos[0]->nombre_puesto,					
+					'puesto_principal' => $lista_puestos[0]->nombre_puesto,
+					'numero_item_principal' => $lista_puestos[0]->numero_item,
 					'id_dependencia_principal' => $lista_puestos[0]->id_dependencia,
 					'id_subdependencia_principal' => $lista_puestos[0]->id_subdependencia,
-					'nombre_dependencia_principal' => $lista_puestos[0]->nombre_dependencia,
-					'nombre_subdependencia_principal' => $lista_puestos[0]->nombre_subdependencia,
+					'nivel_dependencia_principal' => $lista_puestos[0]->nivel_dependencia,
+					'id_puesto_secundario' => $id_puesto_secundario,
+					'puesto_secundario' => $puesto_secundario,
+					'numero_item_secundario' => $numero_item_secundario,
+					'id_dependencia_secundario' => $id_dependencia_secundario,
+					'id_subdependencia_secundario' => $id_subdependencia_secundario,
+					'nivel_dependencia_secundario' => $nivel_dependencia_secundario,
 					'id_apliacion' => $IDAPLICACION,
-					'id_entidad' => $id_entidad,
-					);
-					$this->session->set_userdata($data);
-					redirect("inicio");
-				} 
-				else 
-				{
-					$mensaje ="El usuario no se encuentra asociado a ningun puesto o cargo institucional";
-					$this->index($mensaje);
-				}
-
-				
+					'id_entidad' => $IDENTIDAD,
+				);
+				$this->session->set_userdata($data);
+				redirect("inicio");
 			}
 			else
 			{

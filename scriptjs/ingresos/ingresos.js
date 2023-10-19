@@ -134,8 +134,9 @@ function agregarMateriales(id_ingreso,e)
     //alert($(e).parents("tr").find("td:nth-child(2)").html())
     $("#orden_compra").html("<b>ORDEN DE COMPRA : </b>"+ $(e).parents("tr").find("td:nth-child(2)").html());
     //$("#proveedor").load(base_url +"Materiales/Proveedores/getNombreProveedor/" + $(e).parents("tr").find("td:nth-child(7)").html());
-    $("#proveedor").html("<br><b>PROVEEDOR : </b>"+ $(e).parents("tr").find("td:nth-child(7)").html());
-    $("#descripcion").html("<br><b>DESCRIPCION : </b>"+ $(e).parents("tr").find("td:nth-child(8)").html());
+    $("#proveedor").html("<br><b>PROVEEDOR : </b>"+ $(e).parents("tr").find("td:nth-child(6)").html());
+    $("#descripcion").html("<br><b>DESCRIPCION : </b>"+ $(e).parents("tr").find("td:nth-child(7)").html());
+    $("#fechaIngreso").html("<br><b>FECHA REGISTRO : </b>"+ $(e).parents("tr").find("td:nth-child(8)").html());
     $('#cargarIngresos').show();
     $('#materialSeleccionado').show();
 
@@ -491,7 +492,7 @@ function validardatosIngreso()
             }
         }       
     });
-    /*$(" select").each(function(){
+    $(" select").each(function(){
         if($(this).attr('id')=='slProveedor')
         {
             if(this.value== 0 )
@@ -502,7 +503,7 @@ function validardatosIngreso()
                     respuesta = false;
             }
         }       
-    });*/
+    });
   
     return respuesta;
 }

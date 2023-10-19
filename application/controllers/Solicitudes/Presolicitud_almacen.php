@@ -44,7 +44,8 @@ class Presolicitud_almacen extends CI_Controller
 	function cargartablasMaterialesAlmacen()
 	{
 		$draw = intval($this->input->get("draw"));
-		$filas = $this->solicitudes_model->getMaterialesInventario();
+		$id_entidad = $id_usuario = $this->session->userdata('id_entidad');
+		$filas = $this->solicitudes_model->getMaterialesInventario($id_entidad);
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)

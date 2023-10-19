@@ -135,21 +135,21 @@ class Aprobacion extends CI_Controller
 		$id_ingreso  = $this->input->post('id_ing');
 		$estado = 'ELB';
 		$tipoProceso = 'INGP';
-		$id_funcionario = $this->session->userdata('id_funcionario');
-		$id_entidad = $this->session->userdata('id_entidad');		
+		$id_funcionario = $this->session->userdata('id_funcionario');		
+		$entidad = $this->session->userdata('id_entidad');
 		$gestion = gestion_vigente();
 		$filas = $this->ingresos_model->getIngresosDetallesId($id_ingreso,$estado);	
 		$dataUpdate = array(	    		
 				'estado' => 'AC',
     	);	
-		$tabla = "inventario.inventarios";
+		$tabla = "inventarios";
 	    foreach ($filas as $fila)
 	    {	
 	    	
 	    	$invetariosProductos = $this->ingresos_model->cantidadInventarioProducto($fila->id_material);
 	    	$id_inventario_inicial_ingreso = $invetariosProductos[0]->correlativo + 1;
 	    	$data = array(	    		  				  				
-  				'id_entidad' => $id_entidad,
+  				'id_entidad' => $entidad,
   				'gestion' => $gestion,
   				'id_ingreso' => $id_ingreso,
   				'id_ingreso_detalle' => $fila->id,  				

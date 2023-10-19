@@ -45,8 +45,8 @@ class Aprobar_solicitud extends CI_Controller
 	function cargartablaSolicitudesConfirmadas()
 	{
 		$draw = intval($this->input->get("draw"));
-		$estado = 'CON';
 		$id_entidad = $this->session->userdata('id_entidad');
+		$estado = 'CON';
 		$filas = $this->solicitudes_model->getSolicitudesConfirmadasPorDireccion($id_entidad,$estado);
 		$data = array();
 		$num = 1;

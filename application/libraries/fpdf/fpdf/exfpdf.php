@@ -424,15 +424,15 @@ include 'formatedstring.php';
     function logoHeaderP()
     {
       $this->SetMargins(-10,15,-10);
-      //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-      //$this->Image('resources/images/logos/chakana.png', 165, 5, 38);
+      $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 45);
+      $this->Image('resources/images/logos/chakana.png', 165, 5, 38);
       $this->Ln(5); 
     }
     function logoHeaderL()
     {
       $this->SetMargins(-10,15,-10);
-      //$this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
-      //$this->Image('resources/images/logos/chakana.png', 280, 5, 38);
+      $this->Image('resources/images/logos/logo_senape_reporte.png', 15, 6, 75);
+      $this->Image('resources/images/logos/chakana.png', 280, 5, 38);
       $this->Ln(5); 
     }
 
