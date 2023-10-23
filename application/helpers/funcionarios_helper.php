@@ -37,12 +37,18 @@ function nombre_estructura($iddireccion)
     $nombre = $persona[0]->nombre_dependencia;
     return $nombre;
   }
+  
   function sigla_estrucctura($iddireccion)
   {
     $fila = &get_instance();
     $fila->load->model('funcionarios_model');
     $persona = $fila->funcionarios_model->estructura_id($iddireccion);
-    $nombre = $persona[0]->sigla_dependencia;
+    $nombre = $iddireccion;
+    if($persona)
+    {
+      $nombre = $persona[0]->sigla;  
+    }
+    
     return $nombre;
   }
 

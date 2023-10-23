@@ -88,6 +88,7 @@ class IngresosSalidas extends CI_Controller
 
 		$draw = intval($this->input->get("draw"));
 		$filas = $this->reportes_model->getSalidasFechas($fecha_inicio, $fecha_fin);	
+		
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)

@@ -53,7 +53,8 @@ class Reportes extends CI_Controller
 
 	{
 		$draw = intval($this->input->get("draw"));
-		$filas = $this->solicitudes_model->getMaterialesInventario();
+		$id_entidad = $this->session->userdata('id_entidad');
+		$filas = $this->solicitudes_model->getMaterialesInventario($id_entidad);
 		$data = array();
 		$num = 1;
 	    foreach ($filas as $fila)
@@ -132,6 +133,7 @@ class Reportes extends CI_Controller
 				$tabla = $tabla."<td></td>";
 				$tabla = $tabla."<td>".numeroSolicitudAlmacen($fila->id_salida)."</td>";				
 				$tabla = $tabla."<td>".sigla_estrucctura($dependencia)."</td>";
+				//$tabla = $tabla."<td>".$dependencia."</td>";
 				$tabla = $tabla."<td>0</td>";
 				$tabla = $tabla."<td>0.00</td>";
 				$tabla = $tabla."<td>0.00</td>";
