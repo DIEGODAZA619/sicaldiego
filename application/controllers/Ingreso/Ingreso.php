@@ -121,6 +121,7 @@ class Ingreso extends CI_Controller
 	    echo json_encode($output);
 	    exit();
 	}
+	
 	function cargartablasMaterialesAcumulados()
 	{
 		$draw = intval($this->input->get("draw"));
