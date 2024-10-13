@@ -129,6 +129,7 @@ CREATE TABLE gestion
 CREATE TABLE ingresos
 (
   id serial NOT NULL,
+  id_sucursal integer,
   id_entidad integer,
   gestion integer,
   order_compra varchar(100),
@@ -138,16 +139,16 @@ CREATE TABLE ingresos
   monto_total_factura double precision DEFAULT 0,
   id_provedor integer,
   descripcion_ingreso text,
+  correlativo integer,
+  cite text,
+  fecha_nota_remision date,
   fecha_ingreso date,
   id_funcionario_registro integer,
   fecha_registro datetime  DEFAULT now(),
   id_funcionario_update integer,
   fecha_modificacion datetime ,
-  estado varchar(3) DEFAULT 'ELB',
-  activo varchar(3) DEFAULT 'SI',
-  correlativo integer,
-  cite text,
-  fecha_nota_remision date,
+  estado varchar(3) DEFAULT 'ELB', 
+  
   CONSTRAINT ingresos_pkey PRIMARY KEY (id)
 );
 
@@ -164,21 +165,21 @@ CREATE TABLE ingresos_detalle
   fecha_registro datetime  DEFAULT now(),
   id_funcionario_update integer,
   fecha_modificacion datetime ,
-  estado varchar(3) DEFAULT 'ELB',
-  activo varchar(3) DEFAULT 'SI',
+  estado varchar(3) DEFAULT 'ELB',  
   CONSTRAINT ingresos_detalle_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE inventarios
 (
   id serial NOT NULL,
-  id_entidad integer,
+  id_empresa integer,
+  id_sucursal integer,
   gestion integer,
+  id_producto integer,
   id_ingreso integer,
   id_ingreso_detalle integer,
-  id_salida integer,
-  id_salida_detalle integer,
-  id_material integer,
+  id_venta integer,
+  id_detalle_venta integer,  
   tipo_proceso text,
   tipo_ingreso_egreso text,
   cantidad_entrada double precision,
@@ -188,13 +189,13 @@ CREATE TABLE inventarios
   precio_total double precision,
   fecha date,
   id_inventario integer,
-  id_funcionario_solicitante integer,
-  id_funcionario_almacen integer,
-  fecha_registro datetime  DEFAULT now(),
-  fecha_modificacion datetime ,
-  estado varchar(3) DEFAULT 'AC',
+  id_usuario_solicitante integer,
+  id_usuario_almacen integer,  
   id_inventario_inicial_ingreso integer,
   id_inventario_ingresos integer,
+  fecha_registro datetime  DEFAULT now(),
+  fecha_modificacion datetime ,
+  estado varchar(3) DEFAULT 'AC'
   CONSTRAINT inventarios_pkey PRIMARY KEY (id)
 );
 

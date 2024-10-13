@@ -86,16 +86,16 @@ class Login extends CI_Controller
 					'id_usuario' => $id_usuario,
 					'id_funcionario' => $login[0]->id_persona,
 					'rolescero' => $rolescero,
-					'sede' => $lista_puestos[0]->sede_trabajo,
+					
 					'roles' => $roles,
 					'gestion' => gestion_vigente(),
 					'nombre_completo' => $persona[0]->nombres." ".$persona[0]->primer_apellido." ".$persona[0]->segundo_apellido,
 					'id_puesto_principal' => $lista_puestos[0]->id_puesto,
 					'puesto_principal' => $lista_puestos[0]->nombre_puesto,
-					'numero_item_principal' => $lista_puestos[0]->numero_item,
+					
 					'id_dependencia_principal' => $lista_puestos[0]->id_dependencia,
 					'id_subdependencia_principal' => $lista_puestos[0]->id_subdependencia,
-					'nivel_dependencia_principal' => $lista_puestos[0]->nivel_dependencia,
+					
 					'id_puesto_secundario' => $id_puesto_secundario,
 					'puesto_secundario' => $puesto_secundario,
 					'numero_item_secundario' => $numero_item_secundario,
